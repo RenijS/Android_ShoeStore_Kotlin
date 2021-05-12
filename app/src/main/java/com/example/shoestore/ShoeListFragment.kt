@@ -1,12 +1,12 @@
 package com.example.shoestore
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shoestore.databinding.FragmentShoeListBinding
@@ -18,6 +18,7 @@ class ShoeListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         }
 
     override fun onCreateView(
@@ -42,6 +43,23 @@ class ShoeListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
         recyclerView.adapter = ListAdapter(this.requireContext(), itemList)
 
+    }
+
+    //creating menu
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.logout_menu,menu)
+    }
+
+    //when item in menu is selected
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.loginFragment ->
+                // this navigates itself
+                // the id of loginFragment in navGraph and the id of item in menu is same which helps in navigation
+                NavigationUI.onNavDestinationSelected(item!!, this.findNavController())
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 }

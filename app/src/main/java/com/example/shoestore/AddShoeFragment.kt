@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -45,7 +46,13 @@ class AddShoeFragment : Fragment() {
                         etSex.text.toString()
                     )
                 )
-                view.findNavController().navigate(AddShoeFragmentDirections.actionAddShoeFragmentToShoeListFragment())
+                etTitle.text!!.clear()
+                etPrice.text!!.clear()
+                etCompany.text!!.clear()
+                etSex.text!!.clear()
+                etDesc.text!!.clear()
+
+                Toast.makeText(this.requireContext(), "Item added", Toast.LENGTH_SHORT).show()
             }
         }
 
