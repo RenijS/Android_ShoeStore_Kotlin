@@ -6,38 +6,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.example.shoestore.databinding.FragmentShoeDetailBinding
 
 class ShoeDetailFragment : Fragment() {
 
-    private var _binding: FragmentShoeDetailBinding? = null
-    val binding get() = _binding!!
+    private lateinit var binding: FragmentShoeDetailBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private lateinit var item: Item
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentShoeDetailBinding.inflate(inflater,container, false)
-        val args = ShoeDetailFragmentArgs.fromBundle(requireArguments())
-        binding.tvTitleD.text = itemList[args.position].name
-        binding.tvCompany.text = itemList[args.position].company
-        binding.tvDesc.text = itemList[args.position].description
-        binding.tvSex.text = itemList[args.position].sex
-        binding.tvPrice.text = "$ ${itemList[args.position].price}"
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_shoe_detail,container, false)
+
+        var args = ShoeDetailFragmentArgs.fromBundle(requireArguments())
+
+        //databinding the data, connecting List with the fragments xml.
+        item = itemList[args.position]
+        //binding.item refers to name = "Item" in data in the fragment's xml
+        binding.item = item
 
         //setting app bar name
         (activity as AppCompatActivity).supportActionBar?.title = "Shoe Detail"
         return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
