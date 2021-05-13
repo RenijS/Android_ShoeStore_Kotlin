@@ -8,20 +8,20 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.shoestore.databinding.FragmentAddShoeBinding
 
 class AddShoeFragment : Fragment() {
 
-    private var _binding: FragmentAddShoeBinding? = null
-    val binding get() = _binding!!
+    private lateinit var binding: FragmentAddShoeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentAddShoeBinding.inflate(inflater,container,false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_add_shoe,container,false)
 
         val etTitle = binding.etTitle
         val etDesc = binding.etDesc

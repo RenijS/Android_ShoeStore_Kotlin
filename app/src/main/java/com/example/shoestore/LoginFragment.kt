@@ -8,14 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.shoestore.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
 
-    private var _binding: FragmentLoginBinding? = null
-
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentLoginBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,7 +23,7 @@ class LoginFragment : Fragment() {
 
         // Inflate the layout for this fragment
 //        return inflater.inflate(R.layout.fragment_login, container, false)
-        _binding = FragmentLoginBinding.inflate(inflater,container,false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_login,container,false)
 
         binding.buttonLogin.setOnClickListener { view: View ->
             if (binding.etEmail.text.isNullOrEmpty() && binding.etPassword.text.isNullOrEmpty()){
@@ -58,10 +57,5 @@ class LoginFragment : Fragment() {
     //To hide option menu(logout) from login fragment
     override fun onPrepareOptionsMenu(menu: Menu) {
         menu.clear()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -13,8 +14,7 @@ import com.example.shoestore.databinding.FragmentShoeListBinding
 
 class ShoeListFragment : Fragment() {
 
-    private var _binding: FragmentShoeListBinding? = null
-    val binding get() = _binding!!
+    private lateinit var binding: FragmentShoeListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +26,7 @@ class ShoeListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentShoeListBinding.inflate(inflater, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_shoe_list,container, false)
         binding.fActionBar.setOnClickListener { view:View ->
             view.findNavController().navigate(ShoeListFragmentDirections.actionShoeListFragmentToAddShoeFragment())
         }

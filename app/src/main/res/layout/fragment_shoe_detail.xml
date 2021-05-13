@@ -8,6 +8,8 @@
             name="Item"
             type="com.example.shoestore.Item" />
     </data>
+
+    <!-- constraint layout is used because it allows to determine position of UI element-->
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
