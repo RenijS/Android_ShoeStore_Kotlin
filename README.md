@@ -3,13 +3,12 @@ Shoe store app where user can add new item and look through list. In this app, y
 
 The app has 6 screens:
 
-1.Login
+1.Login 
 2.Welcome
 3.Instruction
 4.Shoe List
 5.Add Shoe
 6.Shoe Detail
-
 ---
 
 ###Login Screen
