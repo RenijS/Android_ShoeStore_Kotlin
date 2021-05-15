@@ -11,4 +11,35 @@ The app has 6 screens:
 6. Shoe Detail
 ---
 
-###Login Screen
+## Login Screen 
+ 
+ ![](screenshots/login.PNG)
+ 
+ The login page will not do anything much, the user just have to enter details and click the available button.
+
+## Welcome Screen
+
+<img src="screenshots/welcome.PNG">
+
+Same goes for the welcome screen.
+
+## Instruction Screen
+
+![](screenshots/instruction.PNG)
+
+Same goes for the instruction screen
+
+## Shoe List Screen
+
+ ![](screenshots/list.PNG)
+ 
+ Here user can see shoe list. 
+  The menu option will give logout option which takes to login screen. 
+ When shoe list is clicked then it takes to detail screen where details of shoe are given. 
+ When FloatingActionButton is clicked then it takes to add shoe screen.
+ 
+## Add Shoe Screen
+ 
+  ![](screenshots/add.PNG)
+  
+  Here user can add new shoe to the list.
