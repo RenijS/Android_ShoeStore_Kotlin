@@ -1,5 +1,6 @@
 # Shoe Store App
 Shoe store app where user can add new item and look through list. In this app, you can see some use of Navigation Component, Data Binding, RecyclerView etc. 
+
 The app has 6 screens:
 
 1.Login
