@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_welcomeFragment_to_instructionFragment"
             app:destination="@id/instructionFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_instructionFragment2"
+            app:destination="@id/instructionFragment" />
     </fragment>
     <fragment
         android:id="@+id/instructionFragment"
@@ -52,8 +55,8 @@
         android:label="fragment_shoe_detail"
         tools:layout="@layout/fragment_shoe_detail" >
         <argument
-            android:name="position"
-            app:argType="integer" />
+            android:name="shoeDetails"
+            app:argType="com.example.shoestore.model.Item" />
     </fragment>
     <fragment
         android:id="@+id/addShoeFragment"

@@ -5,16 +5,23 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.shoestore.application.ShoeApplication
 import com.example.shoestore.databinding.FragmentShoeListBinding
+import com.example.shoestore.viewmodel.ShoeViewModel
+import com.example.shoestore.viewmodel.ShoeViewModelFactory
 
 class ShoeListFragment : Fragment() {
 
     private lateinit var binding: FragmentShoeListBinding
+
+    private val mShoeViewModel: ShoeViewModel by viewModels{
+        ShoeViewModelFactory((requireActivity().application as ShoeApplication).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,9 +46,25 @@ class ShoeListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
-        recyclerView.adapter = ListAdapter(this.requireContext(), itemList)
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireActivity())
+        val listAdapter = ListAdapter(this)
+        binding.recyclerView.adapter = listAdapter
+
+        mShoeViewModel.allShoeList.observe(viewLifecycleOwner){
+            shoes ->
+                shoes.let {
+                    if (it.isNotEmpty()){
+                        binding.tvNoItem.visibility = View.GONE
+                        binding.recyclerView.visibility = View.VISIBLE
+
+                        listAdapter.shoeList(it)
+                    } else{
+                        binding.tvNoItem.visibility = View.VISIBLE
+                        binding.recyclerView.visibility = View.GONE
+
+                    }
+                }
+        }
 
     }
 
@@ -57,7 +80,7 @@ class ShoeListFragment : Fragment() {
             R.id.loginFragment ->
                 // this navigates itself
                 // the id of loginFragment in navGraph and the id of item in menu is same which helps in navigation
-                NavigationUI.onNavDestinationSelected(item!!, this.findNavController())
+                NavigationUI.onNavDestinationSelected(item, this.findNavController())
             else -> super.onOptionsItemSelected(item)
         }
     }

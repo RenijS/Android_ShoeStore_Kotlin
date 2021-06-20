@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import com.example.shoestore.R
 import com.example.shoestore.databinding.FragmentWelcomeBinding
 
 class WelcomeFragment : Fragment() {
@@ -19,7 +20,7 @@ class WelcomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_welcome,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_welcome,container,false)
 
         binding.buttonInstruction.setOnClickListener { view : View ->
             view.findNavController().navigate(WelcomeFragmentDirections.actionWelcomeFragmentToInstructionFragment())
