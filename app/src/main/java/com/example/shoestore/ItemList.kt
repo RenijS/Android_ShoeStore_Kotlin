@@ -1,12 +1,14 @@
 package com.example.shoestore
 
+import com.example.shoestore.model.Item
+
 var itemList: MutableList<Item> = mutableListOf(
     Item("Continental 80",
         "THIS IS A UNISEX PRODUCT.THESE '80S TRAINERS BRING ON THE TENNIS VIBES.",
         150.0,
         "Adidas",
         "Men")
-    ,Item("Stan Smith Yoda Shoe",
+    , Item("Stan Smith Yoda Shoe",
         "CLASSIC SNEAKERS FOR FANS OF YODA FROM STAR WARS.This product is made with Primegreen",
         160.0,
         "Adidas",

@@ -23,7 +23,7 @@ class LoginFragment : Fragment() {
 
         // Inflate the layout for this fragment
 //        return inflater.inflate(R.layout.fragment_login, container, false)
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_login,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login,container,false)
 
         binding.buttonLogin.setOnClickListener { view: View ->
             if (binding.etEmail.text.isNullOrEmpty() && binding.etPassword.text.isNullOrEmpty()){
