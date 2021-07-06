@@ -15,7 +15,7 @@ The app has 6 screens:
  
  ![](screenshots/login.PNG)
  
- The login page will not do anything much, the user just have to enter details and click the available button.
+ The login page uses Firebase.
 
 ## Welcome Screen
 
