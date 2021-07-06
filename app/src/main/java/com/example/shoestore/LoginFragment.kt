@@ -11,8 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.shoestore.databinding.FragmentLoginBinding
+import com.google.firebase.auth.FirebaseAuth
 
-class LoginFragment : Fragment() {
+ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
 
@@ -28,17 +29,60 @@ class LoginFragment : Fragment() {
         binding.buttonLogin.setOnClickListener { view: View ->
             if (binding.etEmail.text.isNullOrEmpty() && binding.etPassword.text.isNullOrEmpty()){
                 Toast.makeText(this.requireContext(),"Enter all details",Toast.LENGTH_LONG).show()
-            } else {
-                view.findNavController()
-                    .navigate(LoginFragmentDirections.actionLoginFragmentToWelcomeFragment())
+            }
+            else {
+                val email: String = binding.etEmail.text.toString().trim{ it <= ' '}
+                val password: String = binding.etPassword.text.toString().trim{ it <= ' '}
+
+                //log in using FirebaseAuth
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            val firebaseUser = task.result!!.user!!
+                            Toast.makeText(
+                                this.requireContext(),
+                                "Logged in successfully with ${firebaseUser.email}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                            view.findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToWelcomeFragment())
+                            } else {
+                            Toast.makeText(
+                                this.requireContext(),
+                                task.exception!!.message.toString(),
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
             }
         }
         binding.buttonSignup.setOnClickListener { view: View ->
             if (binding.etEmail.text.isNullOrEmpty() && binding.etPassword.text.isNullOrEmpty()) {
                 Toast.makeText(this.requireContext(), "Enter all details", Toast.LENGTH_LONG).show()
             } else {
-                view.findNavController()
-                    .navigate(LoginFragmentDirections.actionLoginFragmentToWelcomeFragment())
+                val email: String = binding.etEmail.text.toString().trim{ it <= ' '}
+                val password: String = binding.etPassword.text.toString().trim{ it <= ' '}
+
+                //creating instance and registering user
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            val firebaseUser = task.result!!.user!!
+                            Toast.makeText(
+                                this.requireContext(),
+                                "registered successfully with ${firebaseUser.email}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                            view.findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToWelcomeFragment())
+                        } else {
+                            Toast.makeText(
+                                this.requireContext(),
+                                task.exception!!.message.toString(),
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
             }
         }
 

@@ -14,6 +14,7 @@ import com.example.shoestore.application.ShoeApplication
 import com.example.shoestore.databinding.FragmentShoeListBinding
 import com.example.shoestore.viewmodel.ShoeViewModel
 import com.example.shoestore.viewmodel.ShoeViewModelFactory
+import com.google.firebase.auth.FirebaseAuth
 
 class ShoeListFragment : Fragment() {
 
@@ -77,10 +78,12 @@ class ShoeListFragment : Fragment() {
     //when item in menu is selected
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
-            R.id.loginFragment ->
+            R.id.loginFragment -> {
+                FirebaseAuth.getInstance().signOut()
                 // this navigates itself
                 // the id of loginFragment in navGraph and the id of item in menu is same which helps in navigation
                 NavigationUI.onNavDestinationSelected(item, this.findNavController())
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
